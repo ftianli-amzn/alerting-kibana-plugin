@@ -21,7 +21,6 @@ import { customWebhookToFormik } from '../../../../Destinations/containers/Creat
 export default function monitorToFormik(monitor) {
   console.log('#monitor: ', monitor);
   const formikValues = _.cloneDeep(FORMIK_INITIAL_VALUES);
-  console.log('#formikValues :', formikValues);
   if (!monitor) return formikValues;
   const {
     name,
@@ -35,6 +34,7 @@ export default function monitorToFormik(monitor) {
   // Default searchType to query, because if there is no ui_metadata or search then it was created through API or overwritten by API
   // In that case we don't want to guess on the UI what selections a user made, so we will default to just showing the extraction query
   const { searchType = 'query', fieldName } = search;
+  console.log('#indices :', indices);
 
   return {
     /* INITIALIZE WITH DEFAULTS */
@@ -53,7 +53,7 @@ export default function monitorToFormik(monitor) {
     searchType,
     fieldName: fieldName ? [{ label: fieldName }] : [],
     timezone: timezone ? [{ label: timezone }] : [],
-    index: indices == {} ? indices.map((index) => ({ label: index })) : {},
+    index: Array.isArray(indices) ? indices.map((index) => ({ label: index })) : {},
     query: JSON.stringify(query, null, 4),
     http: customWebhookToFormik(http),
   };
