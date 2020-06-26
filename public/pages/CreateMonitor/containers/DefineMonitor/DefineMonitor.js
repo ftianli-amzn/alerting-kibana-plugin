@@ -303,7 +303,7 @@ class DefineMonitor extends Component {
     }
     return {
       actions: [
-        <EuiButton disabled={runIsDisabled} onClick={this.onRunRequest}>
+        <EuiButton disabled={runIsDisabled} onClick={this.onRunQuery}>
           Run
         </EuiButton>,
       ],
@@ -344,7 +344,7 @@ class DefineMonitor extends Component {
       (values.http.urlType === URL_TYPE.ATTRIBUTE_URL && !values.http.host);
     return {
       actions: [
-        <EuiButton disabled={runIsDisabled} onClick={this.onRunHttp}>
+        <EuiButton disabled={runIsDisabled} onClick={this.onRunQuery}>
           Run
         </EuiButton>,
       ],
