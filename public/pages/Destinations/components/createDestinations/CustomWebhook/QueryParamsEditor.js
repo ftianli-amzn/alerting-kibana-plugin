@@ -58,11 +58,14 @@ const propTypes = {
   type: PropTypes.string.isRequired,
   queryParams: PropTypes.array.isRequired,
   isEnabled: PropTypes.bool,
+  isResponsive: PropTypes.bool,
 };
 
-const QueryParamsEditor = ({ type, queryParams, isEnabled = true }) => (
-  <FieldArray name={`${type}.queryParams`} validateOnChange={true}>
-    {(arrayHelpers) => (
+const QueryParamsEditor = ({ type, queryParams, isEnabled = true, isResponsive = false }) => (
+  <FieldArray
+    name={`${type}.queryParams`}
+    validateOnChange={true}
+    render={(arrayHelpers) => (
       <AttributeEditor
         titleText="Query parameters"
         onAdd={() => arrayHelpers.push({ key: '', value: '' })}
@@ -74,6 +77,7 @@ const QueryParamsEditor = ({ type, queryParams, isEnabled = true }) => (
         onRenderKeyField={handleRenderKeyField}
         onRenderValueField={handleRenderValueField}
         isEnabled={isEnabled}
+        isResponsive={isResponsive}
       />
     )}
   </FieldArray>
