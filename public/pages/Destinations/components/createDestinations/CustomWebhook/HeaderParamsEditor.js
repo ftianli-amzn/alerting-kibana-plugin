@@ -59,12 +59,15 @@ const handleRenderValueField = (fieldName, index) => (
 const propTypes = {
   type: PropTypes.string.isRequired,
   headerParams: PropTypes.array.isRequired,
+  useGlyphAsRemoveButton: PropTypes.array,
 };
-const HeaderParamsEditor = ({ type, headerParams }) => (
+const HeaderParamsEditor = ({ type, headerParams, useGlyphAsRemoveButton }) => (
   <Fragment>
     <SubHeader title={<h6>Header information</h6>} description={''} />
-    <FieldArray name={`${type}.headerParams`} validateOnChange={true}>
-      {(arrayHelpers) => (
+    <FieldArray
+      name={`${type}.headerParams`}
+      validateOnChange={true}
+      render={(arrayHelpers) => (
         <AttributeEditor
           onAdd={() => arrayHelpers.push({ key: '', value: '' })}
           onRemove={(index) => index !== 0 && arrayHelpers.remove(index)}
@@ -74,6 +77,7 @@ const HeaderParamsEditor = ({ type, headerParams }) => (
           removeButtonText="Remove header"
           onRenderKeyField={handleRenderKeyField}
           onRenderValueField={handleRenderValueField}
+          useGlyphAsRemoveButton={useGlyphAsRemoveButton}
         />
       )}
     </FieldArray>
