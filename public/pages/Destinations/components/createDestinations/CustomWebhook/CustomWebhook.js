@@ -29,12 +29,7 @@ const CustomWebhook = ({ type, values }) => (
     <EuiSpacer size="m" />
     <MethodEditor type={type} />
     <EuiSpacer size="m" />
-    <HeaderParamsEditor
-      type={type}
-      headerParams={values[type].headerParams}
-      useGlyphAsRemoveButton={['xs']}
-      buttonInFirstRowIsEnabled={false}
-    />
+    <HeaderParamsEditor type={type} headerParams={values[type].headerParams} />
   </div>
 );
 
