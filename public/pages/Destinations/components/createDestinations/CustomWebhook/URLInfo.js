@@ -163,8 +163,10 @@ const URLInfo = ({ type, values }) => {
           inputProps={{
             disabled: isUrlEnabled,
             isInvalid,
-            onFocus: (e, field, form) => {
-              form.setFieldError(`${type}.host`, undefined);
+            // 'validateHost()' is only called onBlur, but we enable the basic 'required()' validation onChange
+            onChange: (e, field, form) => {
+              field.onChange(e);
+              form.setFieldError(`${type}.host`, required(e.target.value));
             },
             placeholder: 'e.g. "localhost", "127.0.0.1", "example.com"',
           }}

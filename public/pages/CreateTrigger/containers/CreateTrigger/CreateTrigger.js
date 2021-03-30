@@ -137,7 +137,7 @@ export default class CreateTrigger extends Component {
       .post('../api/alerting/monitors/_execute', { body: JSON.stringify(monitorToExecute) })
       .then((resp) => {
         if (resp.ok) {
-          this.setState({ executeResponse: resp.resp });
+          this.setState({ executeResponse: resp.resp }, this.overrideInitialValues);
         } else {
           // TODO: need a notification system to show errors or banners at top
           console.error('err:', resp);

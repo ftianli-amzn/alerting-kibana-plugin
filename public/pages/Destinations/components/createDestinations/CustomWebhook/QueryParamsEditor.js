@@ -73,10 +73,8 @@ const QueryParamsEditor = ({ type, queryParams, isEnabled = true, isOptional = t
       }
       description={''}
     />
-    <FieldArray
-      name={`${type}.queryParams`}
-      validateOnChange={true}
-      render={(arrayHelpers) => (
+    <FieldArray name={`${type}.queryParams`} validateOnChange={true}>
+      {(arrayHelpers) => (
         <AttributeEditor
           titleText={'Define set of parameters attached to the end of the url.'}
           onAdd={() => arrayHelpers.push({ key: '', value: '' })}
@@ -91,7 +89,7 @@ const QueryParamsEditor = ({ type, queryParams, isEnabled = true, isOptional = t
           isOptional={isOptional}
         />
       )}
-    />
+    </FieldArray>
   </Fragment>
 );
 

@@ -65,10 +65,8 @@ const propTypes = {
 const HeaderParamsEditor = ({ type, headerParams, isEnabled, isOptional = false }) => (
   <Fragment>
     <SubHeader title={<h6>Header information</h6>} description={''} />
-    <FieldArray
-      name={`${type}.headerParams`}
-      validateOnChange={true}
-      render={(arrayHelpers) => (
+    <FieldArray name={`${type}.headerParams`} validateOnChange={true}>
+      {(arrayHelpers) => (
         <AttributeEditor
           onAdd={() => arrayHelpers.push({ key: '', value: '' })}
           onRemove={(index) => index !== 0 && arrayHelpers.remove(index)}

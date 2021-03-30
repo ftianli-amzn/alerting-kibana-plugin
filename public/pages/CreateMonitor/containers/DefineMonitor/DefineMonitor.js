@@ -336,7 +336,7 @@ class DefineMonitor extends Component {
     };
   }
   renderHttpInput() {
-    const { values } = this.props;
+    const { values, isDarkMode } = this.props;
     const { response } = this.state;
     // Definition of when the "run" button should be disabled for HTTP type.
     const runIsDisabled =
@@ -352,7 +352,7 @@ class DefineMonitor extends Component {
         <React.Fragment>
           <HTTPInput
             response={JSON.stringify(response || '', null, 4)}
-            isDarkMode={this.isDarkMode}
+            isDarkMode={isDarkMode}
             values={values}
           />
         </React.Fragment>

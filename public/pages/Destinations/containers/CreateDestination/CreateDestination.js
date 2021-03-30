@@ -221,19 +221,30 @@ class CreateDestination extends React.Component {
                   <FormikSelect
                     name="type"
                     formRow
+                    fieldProps={{
+                      validate: validateDestinationType(httpClient, notifications),
+                    }}
                     rowProps={{
                       label: 'Type',
                       style: { paddingLeft: '10px' },
+                      isInvalid,
+                      error: hasError,
                     }}
                     inputProps={{
                       disabled: edit,
-                      options: DESTINATION_OPTIONS,
+                      options: this.getAllowedDestinationOptions(),
+                      isInvalid,
                     }}
                   />
                   <EuiSpacer size="m" />
                   <SubHeader title={<h4>Settings</h4>} description={''} />
                   <EuiSpacer size="m" />
-                  {destinationType[values.type]({ values, type: values.type, notifications })}
+                  {destinationType[values.type]({
+                    httpClient,
+                    values,
+                    type: values.type,
+                    notifications,
+                  })}
                 </div>
                 <EuiSpacer size="m" />
               </ContentPanel>

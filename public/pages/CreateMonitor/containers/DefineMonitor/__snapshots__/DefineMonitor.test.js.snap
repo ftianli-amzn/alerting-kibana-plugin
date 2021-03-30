@@ -101,7 +101,6 @@ exports[`DefineMonitor should show warning in case of Ad monitor and plugin is n
           "aggregationType": "count",
           "bucketUnitOfTime": "h",
           "bucketValue": 1,
-          "connection_timeout": 5,
           "cronExpression": "0 */1 * * *",
           "daily": 0,
           "detectorId": "",
@@ -111,6 +110,7 @@ exports[`DefineMonitor should show warning in case of Ad monitor and plugin is n
           "groupedOverFieldName": "bytes",
           "groupedOverTop": 5,
           "http": Object {
+            "connection_timeout": 5,
             "host": "",
             "path": "",
             "port": "",
@@ -121,6 +121,7 @@ exports[`DefineMonitor should show warning in case of Ad monitor and plugin is n
               },
             ],
             "scheme": "https",
+            "socket_timeout": 60,
             "url": "",
             "urlType": "url",
           },
@@ -142,7 +143,6 @@ exports[`DefineMonitor should show warning in case of Ad monitor and plugin is n
     }
 }",
           "searchType": "ad",
-          "socket_timeout": 60,
           "timeField": "",
           "timezone": Array [],
           "weekly": Object {

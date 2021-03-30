@@ -15,30 +15,32 @@
 
 import { URL_TYPE } from '../../../containers/CreateDestination/utils/constants';
 
-const fqdn = '(?:[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(?:\\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})*)'
+const fqdn = '(?:[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(?:\\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})*)';
 const regname = `(?:[a-zA-Z0-9._-]+(?::[^@]*)?@)?${fqdn}`;
-const ipv4 = '(((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))';
+const ipv4 =
+  '(((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))';
 const h16 = '([0-9a-fA-F]{1,4})';
 const ls32 = `((${h16}:${h16})|${ipv4})`;
-const ipv6 = `\\[(`+
-  `((${h16}:){6}${ls32})|`+
-  `(::(${h16}:){5}${ls32})|`+
-  `(${h16}?::(${h16}:){4}${ls32})|`+
-  `(((${h16}:){0,1}${h16})?::(${h16}:){3}${ls32})|`+
-  `(((${h16}:){0,2}${h16})?::(${h16}:){2}${ls32})|`+
-  `(((${h16}:){0,3}${h16})?::${h16}:${ls32})|`+
-  `(((${h16}:){0,4}${h16})?::${ls32})|`+
-  `(((${h16}:){0,5}${h16})?::${h16})|`+
-  `((${h16}:){0,6}${h16})?::`+
+const ipv6 =
+  `\\[(` +
+  `((${h16}:){6}${ls32})|` +
+  `(::(${h16}:){5}${ls32})|` +
+  `(${h16}?::(${h16}:){4}${ls32})|` +
+  `(((${h16}:){0,1}${h16})?::(${h16}:){3}${ls32})|` +
+  `(((${h16}:){0,2}${h16})?::(${h16}:){2}${ls32})|` +
+  `(((${h16}:){0,3}${h16})?::${h16}:${ls32})|` +
+  `(((${h16}:){0,4}${h16})?::${ls32})|` +
+  `(((${h16}:){0,5}${h16})?::${h16})|` +
+  `((${h16}:){0,6}${h16})?::` +
   `)\\]`;
 const path = `(:[0-9]{1,5})?([/?#][-a-zA-Z0-9@:%_\\+.~#?&//=]*)`;
 const localhost = `(localhost)`;
 
 export const validateUrl = (value, allValues) => {
-  const type = allValues.type;
+  // type is "http" when the component 'URLInfo' is used to define a monitor
+  const type = allValues.type ? allValues.type : 'http';
   if (allValues[type].urlType !== URL_TYPE.FULL_URL) return;
   if (!value) return 'Required';
-  // type is "http" when the component is used to define a monitor
   const regexUrl =
     type === 'http'
       ? `^https?:\\/\\/(${regname}|${ipv4}|${ipv6}|${localhost})${path}?$`
@@ -52,7 +54,7 @@ export const validateHost = (value, allValues) => {
   const type = allValues.type ? allValues.type : 'http';
   if (allValues[type].urlType !== URL_TYPE.ATTRIBUTE_URL) return;
   if (!value) return 'Required';
-  const host = `^${fqdn}|${ipv4}|${ipv6}$`
+  const host = `^${fqdn}|${ipv4}|${ipv6}$`;
   const regexHost = type === 'http' ? `${host}|${localhost}` : host;
   const isValidUrl = new RegExp(regexHost).test(value);
   if (!isValidUrl) return 'Invalid Host';

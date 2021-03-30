@@ -50,10 +50,8 @@ Object {
   "connection_timeout": 5,
   "host": "",
   "path": "",
-  "port": "",
-  "query_params": Object {
-    "": "",
-  },
+  "port": -1,
+  "query_params": Object {},
   "scheme": "https",
   "socket_timeout": 60,
 }
@@ -112,10 +110,8 @@ Object {
     "connection_timeout": 5,
     "host": "",
     "path": "",
-    "port": "",
-    "query_params": Object {
-      "": "",
-    },
+    "port": -1,
+    "query_params": Object {},
     "scheme": "https",
     "socket_timeout": 60,
   },
@@ -313,7 +309,7 @@ Object {
           "filter": Array [
             Object {
               "range": Object {
-                "data_end_time": Object {
+                "execution_end_time": Object {
                   "from": "{{period_end}}||-1m",
                   "include_lower": true,
                   "include_upper": true,
